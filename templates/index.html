@@ -963,22 +963,23 @@ a type specimen book. It has survived not only five centuries simply dummy text 
                     <div class="form-box">
                     	<div class="inner">
                             <!-- Appointment form -->
-							<form method="post" id="apointmentform" class="site-apointment-form">
+							<form method="post" id="apointmentform" class="site-apointment-form" action="{% url 'pages:create-order' %}">
+                                {% csrf_token %}
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                     <!-- Name -->
-                                    <label><input type="text" name="contact_name" placeholder="Name" required="required"></label>
+                                    <label><input type="text" name="name" placeholder="Name" required="required"></label>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                     <!-- Email -->
-                                    <label><input type="email" name="contact_email" placeholder="Email" required="required"></label>
+                                    <label><input type="email" name="email" placeholder="Email" required="required"></label>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                     <!-- Phone -->
-                                    <label><input type="number" name="contact_phone" placeholder="Phone" required="required"></label>
+                                    <label><input type="number" name="phone_number" placeholder="Phone" required="required"></label>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                     <!-- No. of. people -->
-                                    <label><input type="number" name="noofpeople" placeholder="No. of. people" required="required"></label>
+                                    <label><input type="number" name="total_people" placeholder="No. of. people" required="required"></label>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                     <!-- Date -->
@@ -986,16 +987,17 @@ a type specimen book. It has survived not only five centuries simply dummy text 
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                                     <!-- Time -->
-                                    <label><select>
+                                    <label>
+                                        <select name="time">
                                     	<option>Please select </option>
-                                    	<option>Breakfast: 8AM to 10AM </option>
-                                        <option>Lunch: 12PM to 02AM </option>
-                                        <option>Dinner: 8PM to 11AM </option>
+                                    	<option >Breakfast: 8AM to 10AM </option>
+                                        <option >Lunch: 12PM to 02AM </option>
+                                        <option >Dinner: 8PM to 11AM </option>
 									</select></label>
                                 </div>
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                     <!-- Message -->
-                                    <label><textarea name="contact_message" placeholder="Message" required></textarea></label>
+                                    <label><textarea name="message" placeholder="Message" required></textarea></label>
                                     <!-- Submit -->
                                 </div>
 								<button type="submit">Book Table <i class="fa fa-arrow-right"> </i></button>
@@ -1041,213 +1043,35 @@ a type specimen book. It has survived not only five centuries simply dummy text 
                         <!-- Content -->
                         <div class="swiper-wrapper">
                             <!-- Slides -->
+                            {% for member in members %}
                             <div class="swiper-slide">
 
                                 <!-- Bootstrap inner columns -->
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-5">
                                         <!-- Image -->
-                                        <figure><img src="{% static 'images/team-1.png' %}" alt="User"></figure>
+                                        <figure><img src="{{ member.image.url }}" alt="User"></figure>
                                     </div>
                                     <div class="col-xs-12 col-sm-7">
                                         <!-- Title -->
-                                        <h4>Jhon Due Stive</h4>
+                                        <h4>{{ member.name }}</h4>
                                         <!-- Description -->
-                                        <h5>Founder & CEO</h5>
+                                        <h5>{{ member.profession }}</h5>
                                         <!-- Paragraph -->
-                                        <p><strong>Lorem Ipsum is simply dummy text of the printing and typeseing
-                                            industry rem Ipsum has been the industry's standard dummy</strong>
-                                            <br><br>
-											Lorem Ipsum is simply dummy text of the printing and typeseing
-                                            industry rem Ipsum has been the industry's standard dummy
-                                            text ever since the when anLoem Ipsum is simply dummy text
-                                            of the printing and typeseing.text ever since the when anLoem Ipsum is simply dummy text
-                                            of the printing and typeseing.</p>
+                                        <p>{{ member.info }}</p>
 
                                         <!-- Social icons -->
                                         <div class="site-team-social">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
+                                            <a href="{{ member.facebook }}"><i class="fa fa-facebook"></i></a>
+                                            <a href="{{ member.twitter }}"><i class="fa fa-twitter"></i></a>
+                                            <a href="{{ member.instagram }}"><i class="fa fa-instagram"></i></a>
                                         </div>
 
                                     </div>
                                 </div>
 
                             </div>
-                            <div class="swiper-slide">
-
-                                <!-- Bootstrap inner columns -->
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-5">
-                                        <!-- Image -->
-                                        <figure><img src="{% static 'images/team-2.png' %}" alt="User"></figure>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-7">
-                                        <!-- Title -->
-                                        <h4>Jhon Due Mata</h4>
-                                        <!-- Description -->
-                                        <h5>Founder & CEO</h5>
-                                        <!-- Paragraph -->
-                                        <p><strong>Lorem Ipsum is simply dummy text of the printing and typeseing
-                                            industry rem Ipsum has been the industry's standard dummy</strong>
-                                            <br><br>
-											Lorem Ipsum is simply dummy text of the printing and typeseing
-                                            industry rem Ipsum has been the industry's standard dummy
-                                            text ever since the when anLoem Ipsum is simply dummy text
-                                            of the printing and typeseing.text ever since the when anLoem Ipsur since the when anLoem Ipsum m is simply dummy text
-                                            of the printing and typeseing.</p>
-
-                                        <!-- Social icons -->
-                                        <div class="site-team-social">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="swiper-slide">
-
-                                <!-- Bootstrap inner columns -->
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-5">
-                                        <!-- Image -->
-                                        <figure><img src="{% static 'images/team-3.png' %}" alt="User"></figure>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-7">
-                                        <!-- Title -->
-                                        <h4>Due Stive</h4>
-                                        <!-- Description -->
-                                        <h5>Founder</h5>
-                                        <!-- Paragraph -->
-                                        <p><strong>Lorem Ipsum is simply dummy text of the printing and typeseing
-                                            industry rem Ipsum has been the industry's standard dummy</strong>
-                                            <br><br>
-											Lorem Ipsum is simply dummy text of the printing and typeseing
-                                            industry rem Ipsum has been the industry's standard dummy
-                                            text ever since the when anLoem Ipsum is simply dummy text
-                                            of the printing and typeseing.text ever since the when anLoem Ipsur since the when anLoem Ipsum m is simply dummy text
-                                            of the printing and typeseing.</p>
-
-
-                                        <!-- Social icons -->
-                                        <div class="site-team-social">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="swiper-slide">
-
-                                <!-- Bootstrap inner columns -->
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-5">
-                                        <!-- Image -->
-                                        <figure><img src="{% static 'images/team-1.png' %}" alt="User"></figure>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-7">
-                                        <!-- Title -->
-                                        <h4>Jhon Due Stive</h4>
-                                        <!-- Description -->
-                                        <h5>Founder & CEO</h5>
-                                        <!-- Paragraph -->
-                                        <p><strong>Lorem Ipsum is simply dummy text of the printing and typeseing
-                                            industry rem Ipsum has been the industry's standard dummy</strong>
-                                            <br><br>
-											Lorem Ipsum is simply dummy text of the printing and typeseing
-                                            industry rem Ipsum has been the industry's standard dummy
-                                            text ever since the when anLoem Ipsum is simply dummy text
-                                            of the printing and typeseing.text ever since the when anLoem Ipsur since the when anLoem Ipsum m is simply dummy text
-                                            of the printing and typeseing.</p>
-
-                                        <!-- Social icons -->
-                                        <div class="site-team-social">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="swiper-slide">
-
-                                <!-- Bootstrap inner columns -->
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-5">
-                                        <!-- Image -->
-                                        <figure><img src="{% static 'images/team-2.png' %}" alt="User"></figure>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-7">
-                                        <!-- Title -->
-                                        <h4>Jhon Due Mata</h4>
-                                        <!-- Description -->
-                                        <h5>Founder & CEO</h5>
-                                        <!-- Paragraph -->
-                                        <p><strong>Lorem Ipsum is simply dummy text of the printing and typeseing
-                                            industry rem Ipsum has been the industry's standard dummy</strong>
-                                            <br><br>
-											Lorem Ipsum is simply dummy text of the printing and typeseing
-                                            industry rem Ipsum has been the industry's standard dummy
-                                            text ever since the when anLoem Ipsum is simply dummy text
-                                            of the printing and typeseing.text ever since the when anLoem Ipsur since the when anLoem Ipsum m is simply dummy text
-                                            of the printing and typeseing.</p>
-
-
-                                        <!-- Social icons -->
-                                        <div class="site-team-social">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="swiper-slide">
-
-                                <!-- Bootstrap inner columns -->
-                                <div class="row">
-                                    <div class="col-xs-12 col-sm-5">
-                                        <!-- Image -->
-                                        <figure><img src="{% static 'images/team-3.png' %}" alt="User"></figure>
-                                    </div>
-                                    <div class="col-xs-12 col-sm-7">
-                                        <!-- Title -->
-                                        <h4>Due Stive</h4>
-                                        <!-- Description -->
-                                        <h5>Founder</h5>
-                                        <!-- Paragraph -->
-                                        <p><strong>Lorem Ipsum is simply dummy text of the printing and typeseing
-                                            industry rem Ipsum has been the industry's standard dummy</strong>
-                                            <br><br>
-											Lorem Ipsum is simply dummy text of the printing and typeseing
-                                            industry rem Ipsum has been the industry's standard dummy
-                                            text ever since the when anLoem Ipsum is simply dummy text
-                                            of the printing and typeseing.text ever since the when anLoem Ipsur since the when anLoem Ipsum m is simply dummy text
-                                            of the printing and typeseing.</p>
-
-
-                                        <!-- Social icons -->
-                                        <div class="site-team-social">
-                                            <a href="#"><i class="fa fa-facebook"></i></a>
-                                            <a href="#"><i class="fa fa-twitter"></i></a>
-                                            <a href="#"><i class="fa fa-google-plus"></i></a>
-                                        </div>
-
-                                    </div>
-                                </div>
-
-                            </div>
+                            {% endfor %}
                         </div>
 
                     </div>
@@ -1259,12 +1083,9 @@ a type specimen book. It has survived not only five centuries simply dummy text 
                     <!-- Thumbnail -->
                     <div class="swiper-container thumbnail" id="team-thumbnails">
                         <ul class="swiper-wrapper">
-                            <li class="swiper-slide" style="background-image:url({% static 'images/team-thumb-1.png' %})"></li>
-                            <li class="swiper-slide" style="background-image:url({% static 'images/team-thumb-2.png' %})"></li>
-                            <li class="swiper-slide" style="background-image:url({% static 'images/team-thumb-3.png' %})"></li>
-                            <li class="swiper-slide" style="background-image:url({% static 'images/team-thumb-1.png' %})"></li>
-                            <li class="swiper-slide" style="background-image:url({% static 'images/team-thumb-2.png' %})"></li>
-                            <li class="swiper-slide" style="background-image:url({% static 'images/team-thumb-3.png' %})"></li>
+                            {% for member in members %}
+                            <li class="swiper-slide" style="background-image:url({{ member.image.url }})"></li>
+                            {% endfor %}
                         </ul>
                     </div>
                     <!-- End thumbnail -->
@@ -1311,48 +1132,20 @@ a type specimen book. It has survived not only five centuries simply dummy text 
                         <div class="swiper-wrapper">
 
                             <!-- Slides -->
+                            {% for feedback in feedbacks %}
                             <div class="swiper-slide">
                             	<div class="inner">
                                     <!-- Image -->
-                                    <figure><img src="{% static 'images/testimonial-user-1.png' %}" alt="User"></figure>
+                                    <figure><img src="{{ feedback.image.url }}" alt="User"></figure>
                                     <!-- Paragraph -->
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typing
-                                        indus try Lorem Ipsum has een the indus try's standard dummy
-                                        text Loremsimply </p>
+                                    <p>{{ feedback.feedback }}</p>
                                     <!-- Title -->
-                                    <h5>Devil Shohemark</h5>
+                                    <h5>{{ feedback.name }}</h5>
                                     <!-- description -->
-                                    <h6>ECO, Kalanidhi</h6>
+                                    <h6>{{ feedback.job }}</h6>
                                 </div>
                             </div>
-                            <div class="swiper-slide">
-                            	<div class="inner">
-                                    <!-- Image -->
-                                    <figure><img src="{% static 'images/testimonial-user-2.png' %}" alt="User"></figure>
-                                    <!-- Paragraph -->
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typing
-                                        indus try Lorem Ipsum has een the indus try's standard dummy
-                                        text Loremsimply </p>
-                                    <!-- Title -->
-                                    <h5>Monster Dustinegre</h5>
-                                    <!-- description -->
-                                    <h6>MD, Envato</h6>
-								</div>
-                            </div>
-                            <div class="swiper-slide">
-                            	<div class="inner">
-                                    <!-- Image -->
-                                    <figure><img src="{% static 'images/testimonial-user-2.png' %}" alt="User"></figure>
-                                    <!-- Paragraph -->
-                                    <p>Lorem Ipsum is simply dummy text of the printing and typing
-                                        indus try Lorem Ipsum has een the indus try's standard dummy
-                                        text Loremsimply </p>
-                                    <!-- Title -->
-                                    <h5>Monster Dustinegre</h5>
-                                    <!-- description -->
-                                    <h6>MD, Envato</h6>
-								</div>
-                            </div>
+                            {% endfor %}
 
                         </div>
                     </div>
@@ -1692,7 +1485,7 @@ a type specimen book. It has survived not only five centuries simply dummy text 
     <div id="blog" class="site-blog site-dark-section-a">
 
         <!-- Bootstrap -->
-        <div class="container">
+        <div class="contwainer">
             <div class="row">
                 <div class="col-xs-12">
                 	<!-- H2 Heading -->
@@ -1928,8 +1721,9 @@ a type specimen book. It has survived not only five centuries simply dummy text 
 
 
                         <!-- Subscribe -->
-                        <form method="post" action="#" class="site-subscribe">
-                            <input type="email" placeholder="Enter your email" required="required" name="form_subscribe">
+                        <form method="post" action="{% url 'pages:create_email' %}" class="site-subscribe">
+                            {% csrf_token %}
+                            <input type="email" placeholder="Enter your email" required="required" name="email">
                             <button type="submit"><i class="fa fa-paper-plane"></i></button>
                         </form>
 
